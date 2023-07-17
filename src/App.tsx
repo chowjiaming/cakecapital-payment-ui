@@ -196,8 +196,8 @@ export function App() {
         >
           Login
         </a>
-        <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-          <div className="absolute inset-0 bg-zinc-900" />
+        <aside className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
+          <div className="absolute inset-0 bg-teal-500" />
           <div className="relative z-20 flex items-center text-lg font-medium">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -213,19 +213,30 @@ export function App() {
             </svg>
             CakeCapital
           </div>
-          <div className="relative z-20 mt-auto">
-            <blockquote className="space-y-2">
-              <p className="text-lg">
-                &ldquo;This library has saved me countless hours of work and
-                helped me deliver stunning designs to my clients faster than
-                ever before.&rdquo;
-              </p>
-              <footer className="text-sm">Sofia Davis</footer>
+          <div className="relative z-20 mt-auto mb-auto">
+            <blockquote className="space-y-8">
+              <header>
+                <h1 className="text-4xl mb-2 font-extrabold">
+                  $500.00
+                </h1>
+                <p className="text-md">
+                  <strong>Due: </strong>July 21, 2023
+                </p>
+              </header>
+              
+              <footer>
+                <p className="text-md">
+                  <strong>From: </strong> Togethere Inc.
+                </p>
+                <p className="text-md">
+                  <strong>InvoiceNo: </strong> 17AB5E5A-9015
+                </p>
+              </footer>
             </blockquote>
           </div>
-        </div>
-        <div className="lg:p-8">
-          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:max-w-screen-sm">
+        </aside>
+        <article className="lg:p-8">
+          <section className="mx-auto flex w-full flex-col justify-center space-y-6 sm:max-w-screen-sm">
             <div className="flex flex-col space-y-2 text-center">
               <h1 className="text-2xl font-semibold tracking-tight">
                 Create an account
@@ -252,8 +263,8 @@ export function App() {
               </a>
               .
             </p>
-          </div>
-        </div>
+          </section>
+        </article>
       </main>
     </>
   );
