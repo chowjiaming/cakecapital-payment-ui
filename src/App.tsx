@@ -1,3 +1,10 @@
+import {
+  BadgeDollarSignIcon,
+  LandmarkIcon,
+  MoreHorizontalIcon,
+  MoveRightIcon,
+} from "lucide-react";
+
 import {Button, buttonVariants} from "@/components/ui/button";
 import {
   Card,
@@ -24,22 +31,22 @@ import {cn} from "@/lib/utils";
 function PaymentCard() {
   return (
     <Card>
-      <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl">Create an account</CardTitle>
-        <CardDescription>
-          Enter your email below to create your account
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="grid gap-4">
+      <CardContent className="mt-6 grid gap-4">
         <div className="grid grid-cols-2 gap-6">
-          <Button variant="outline">
-            <Icons.gitHub className="mr-2 h-4 w-4" />
-            Github
-          </Button>
-          <Button variant="outline">
-            <Icons.google className="mr-2 h-4 w-4" />
-            Google
-          </Button>
+          <a
+            href="https://www.josephchow.dev"
+            className={cn(buttonVariants(), "")}
+          >
+            <Icons.apple className="mr-1 h-4 w-4" />
+            Pay
+          </a>
+          <a
+            href="https://www.josephchow.dev"
+            className={cn(buttonVariants({variant: "outline"}), "")}
+          >
+            <Icons.google className="mr-1 h-4 w-4" />
+            Pay
+          </a>
         </div>
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
@@ -47,7 +54,7 @@ function PaymentCard() {
           </div>
           <div className="relative flex justify-center text-xs uppercase">
             <span className="bg-background px-2 text-muted-foreground">
-              Or continue with
+              Or pay another way
             </span>
           </div>
         </div>
@@ -55,14 +62,7 @@ function PaymentCard() {
           <Label htmlFor="email">Email</Label>
           <Input id="email" type="email" placeholder="m@example.com" />
         </div>
-        <div className="grid gap-2">
-          <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" />
-        </div>
       </CardContent>
-      <CardFooter>
-        <Button className="w-full">Create account</Button>
-      </CardFooter>
       <CardHeader>
         <CardTitle>Payment Method</CardTitle>
         <CardDescription>
@@ -70,7 +70,7 @@ function PaymentCard() {
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-6">
-        <RadioGroup defaultValue="card" className="grid grid-cols-3 gap-4">
+        <RadioGroup defaultValue="card" className="grid grid-cols-4 gap-4">
           <Label
             htmlFor="card"
             className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground [&:has([data-state=checked])]:border-primary"
@@ -92,29 +92,61 @@ function PaymentCard() {
             Card
           </Label>
           <Label
-            htmlFor="paypal"
+            htmlFor="bank"
             className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground [&:has([data-state=checked])]:border-primary"
           >
-            <RadioGroupItem value="paypal" id="paypal" className="sr-only" />
-            <Icons.paypal className="mb-3 h-6 w-6" />
-            Paypal
+            <RadioGroupItem value="bank" id="bank" className="sr-only" />
+            <LandmarkIcon className="mb-3 h-6 w-6" />
+            Bank Transfer
           </Label>
           <Label
-            htmlFor="apple"
+            htmlFor="crypto"
+            className="flex flex-col items-center justify-between whitespace-nowrap rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground [&:has([data-state=checked])]:border-primary"
+          >
+            <RadioGroupItem value="crypto" id="crypto" className="sr-only" />
+            <BadgeDollarSignIcon className="mb-3 h-6 w-6" />
+            Digital Currency
+          </Label>
+          <Label
+            htmlFor="other"
             className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground [&:has([data-state=checked])]:border-primary"
           >
-            <RadioGroupItem value="apple" id="apple" className="sr-only" />
-            <Icons.apple className="mb-3 h-6 w-6" />
-            Apple
+            <RadioGroupItem value="other" id="other" className="sr-only" />
+            <MoreHorizontalIcon className="mb-3 h-6 w-6" />
+            Other
           </Label>
         </RadioGroup>
-        <div className="grid gap-2">
-          <Label htmlFor="name">Name</Label>
-          <Input id="name" placeholder="First Last" />
+        <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="name">Name on card</Label>
+            <Input id="name" placeholder="First Last" />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="phone">Phone</Label>
+            <Input id="phone" placeholder="555-555-5555" />
+          </div>
         </div>
         <div className="grid gap-2">
           <Label htmlFor="number">Card number</Label>
           <Input id="number" placeholder="" />
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="zip">Zip/PostalCode</Label>
+            <Input id="zip" placeholder="91210" />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="country">Country or region</Label>
+            <Select>
+              <SelectTrigger id="country">
+                <SelectValue placeholder="Please select country" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="canada">Canada</SelectItem>
+                <SelectItem value="usa">USA</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
         <div className="grid grid-cols-3 gap-4">
           <div className="grid gap-2">
@@ -146,7 +178,7 @@ function PaymentCard() {
                 <SelectValue placeholder="Year" />
               </SelectTrigger>
               <SelectContent>
-                {Array.from({ length: 10 }, (_, i) => (
+                {Array.from({length: 10}, (_, i) => (
                   <SelectItem key={i} value={`${new Date().getFullYear() + i}`}>
                     {new Date().getFullYear() + i}
                   </SelectItem>
@@ -161,7 +193,9 @@ function PaymentCard() {
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full">Continue</Button>
+        <Button className="w-full bg-violet-400 hover:bg-violet-500">
+          Continue
+        </Button>
       </CardFooter>
     </Card>
   );
@@ -170,22 +204,6 @@ function PaymentCard() {
 export function App() {
   return (
     <>
-      {/* <div className="md:hidden">
-        <Image
-          src="/examples/authentication-light.png"
-          width={1280}
-          height={843}
-          alt="Authentication"
-          className="block dark:hidden"
-        />
-        <Image
-          src="/examples/authentication-dark.png"
-          width={1280}
-          height={843}
-          alt="Authentication"
-          className="hidden dark:block"
-        />
-      </div> */}
       <main className="container relative hidden min-h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <a
           href="https://www.josephchow.dev"
@@ -194,7 +212,8 @@ export function App() {
             "absolute right-4 top-4 md:right-8 md:top-8"
           )}
         >
-          Login
+          Go back
+          <MoveRightIcon className="ml-2 h-6 w-6" />
         </a>
         <aside className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
           <div className="absolute inset-0 bg-teal-500" />
@@ -213,17 +232,15 @@ export function App() {
             </svg>
             CakeCapital
           </div>
-          <div className="relative z-20 mt-auto mb-auto">
+          <div className="relative z-20 mb-auto mt-auto">
             <blockquote className="space-y-8">
               <header>
-                <h1 className="text-4xl mb-2 font-extrabold">
-                  $500.00
-                </h1>
+                <h1 className="mb-2 text-4xl font-extrabold">$500.00</h1>
                 <p className="text-md">
                   <strong>Due: </strong>July 21, 2023
                 </p>
               </header>
-              
+
               <footer>
                 <p className="text-md">
                   <strong>From: </strong> Togethere Inc.
@@ -237,14 +254,6 @@ export function App() {
         </aside>
         <article className="lg:p-8">
           <section className="mx-auto flex w-full flex-col justify-center space-y-6 sm:max-w-screen-sm">
-            <div className="flex flex-col space-y-2 text-center">
-              <h1 className="text-2xl font-semibold tracking-tight">
-                Create an account
-              </h1>
-              <p className="text-sm text-muted-foreground">
-                Enter your email below to create your account
-              </p>
-            </div>
             <PaymentCard />
             <p className="px-8 text-center text-sm text-muted-foreground">
               By clicking continue, you agree to our{" "}
