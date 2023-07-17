@@ -1,11 +1,12 @@
 import {
+  LogInIcon,
   BadgeDollarSignIcon,
   LandmarkIcon,
   MoreHorizontalIcon,
   MoveRightIcon,
 } from "lucide-react";
 
-import {Button, buttonVariants} from "@/components/ui/button";
+import {buttonVariants} from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -70,7 +71,7 @@ function PaymentCard() {
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-6">
-        <RadioGroup defaultValue="card" className="grid grid-cols-4 gap-4">
+        <RadioGroup defaultValue="card" className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <Label
             htmlFor="card"
             className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground [&:has([data-state=checked])]:border-primary"
@@ -116,7 +117,7 @@ function PaymentCard() {
             Other
           </Label>
         </RadioGroup>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="grid gap-2">
             <Label htmlFor="name">Name on card</Label>
             <Input id="name" placeholder="First Last" />
@@ -139,7 +140,7 @@ function PaymentCard() {
             <Label htmlFor="country">Country or region</Label>
             <Select>
               <SelectTrigger id="country">
-                <SelectValue placeholder="Please select country" />
+                <SelectValue placeholder="Select region" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="canada">Canada</SelectItem>
@@ -193,9 +194,13 @@ function PaymentCard() {
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full bg-violet-400 hover:bg-violet-500">
-          Continue
-        </Button>
+        <a
+            href="https://www.josephchow.dev"
+            className={cn(buttonVariants(), "w-full bg-violet-400 hover:bg-violet-500")}
+          >
+            Continue
+            <LogInIcon className="ml-2 h-6 w-6" />
+          </a>
       </CardFooter>
     </Card>
   );
@@ -204,19 +209,19 @@ function PaymentCard() {
 export function App() {
   return (
     <>
-      <main className="container relative hidden min-h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-        <a
+      <main className="container relative min-h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+        <aside className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
+          <div className="absolute inset-0 bg-teal-500" />
+          <a
           href="https://www.josephchow.dev"
           className={cn(
             buttonVariants({variant: "ghost"}),
-            "absolute right-4 top-4 md:right-8 md:top-8"
+            "absolute right-4 top-4 md:right-8 md:top-8 hidden md:flex hover:bg-transparent hover:text-white dark:hover:text-white dark:hover:bg-transparent"
           )}
         >
           Go back
           <MoveRightIcon className="ml-2 h-6 w-6" />
         </a>
-        <aside className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-          <div className="absolute inset-0 bg-teal-500" />
           <div className="relative z-20 flex items-center text-lg font-medium">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -252,7 +257,7 @@ export function App() {
             </blockquote>
           </div>
         </aside>
-        <article className="lg:p-8">
+        <article className="lg:p-8 mb-4 md:mb-0">
           <section className="mx-auto flex w-full flex-col justify-center space-y-6 sm:max-w-screen-sm">
             <PaymentCard />
             <p className="px-8 text-center text-sm text-muted-foreground">
